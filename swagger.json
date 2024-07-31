@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API documentation pour la calculatrice RPN",
+    "version": "1.0.0",
+    "title": "Calculatrice RPN API"
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "paths": {
+    "/calculate": {
+      "post": {
+        "summary": "Calculer une expression RPN",
+        "description": "Evalue une expression Notation Polonaise Inversee.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "expression",
+            "description": "Expression RPN a evaluer",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "expression": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["20", "7", "1", "1", "+", "-", "/", "3", "*", "2", "1", "1", "+", "+", "-"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation reussie",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "number",
+                  "example": 8
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Input invalide ou erreur de calcul",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Expression RPN invalide"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
